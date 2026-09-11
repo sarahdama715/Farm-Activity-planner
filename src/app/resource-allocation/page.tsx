@@ -2,8 +2,8 @@ export default function ResourceAllocation() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-4xl font-bold text-gray-900">Resource Allocation</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-4xl font-bold text-black">Resource Allocation</h1>
+        <p className="text-black mt-2">
           Manage and allocate your farm resources efficiently across your crops and activities.
         </p>
       </div>
@@ -11,22 +11,22 @@ export default function ResourceAllocation() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Resources Overview */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Available Resources</h2>
+          <h2 className="text-xl font-bold text-black mb-4">Available Resources</h2>
           <div className="space-y-3">
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-              <span className="text-gray-700">Water (gallons)</span>
+              <span className="text-black">Water (gallons)</span>
               <span className="font-semibold text-blue-600">0</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-              <span className="text-gray-700">Fertilizer (kg)</span>
+              <span className="text-black">Fertilizer (kg)</span>
               <span className="font-semibold text-green-600">0</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-              <span className="text-gray-700">Labor Hours</span>
+              <span className="text-black">Labor Hours</span>
               <span className="font-semibold text-yellow-600">0</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded">
-              <span className="text-gray-700">Machinery</span>
+              <span className="text-black">Machinery</span>
               <span className="font-semibold text-purple-600">0</span>
             </div>
           </div>
@@ -34,11 +34,11 @@ export default function ResourceAllocation() {
 
         {/* Allocation Form */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Allocate Resources</h2>
+          <h2 className="text-xl font-bold text-black mb-4">Allocate Resources</h2>
           <form className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-900">Resource Type</label>
-              <select className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+              <label className="block text-sm font-medium text-black">Resource Type</label>
+              <select className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-black">
                 <option>Select resource</option>
                 <option>Water</option>
                 <option>Fertilizer</option>
@@ -47,11 +47,11 @@ export default function ResourceAllocation() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-900">Quantity</label>
+              <label className="block text-sm font-medium text-black">Quantity</label>
               <input
                 type="number"
                 placeholder="Enter quantity"
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-black placeholder-gray-400"
               />
             </div>
             <button
@@ -66,8 +66,8 @@ export default function ResourceAllocation() {
 
       {/* Allocation History */}
       <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Allocation History</h2>
-        <p className="text-gray-600">No allocations yet. Start by adding resources above.</p>
+        <h2 className="text-xl font-bold text-black mb-4">Allocation History</h2>
+        <p className="text-black">No allocations yet. Start by adding resources above.</p>
       </div>
     </div>
   );
