@@ -20,6 +20,25 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(() => { localStorage.removeItem(SESSION_KEY); setFarmer(null); }, []);
   useEffect(() => { if (!farmer) return; let timer: ReturnType<typeof setTimeout>; const reset = () => { clearTimeout(timer); timer = setTimeout(logout, IDLE_MS); }; const events = ['pointerdown', 'keydown', 'scroll', 'touchstart']; events.forEach((event) => window.addEventListener(event, reset)); reset(); return () => { clearTimeout(timer); events.forEach((event) => window.removeEventListener(event, reset)); }; }, [farmer, logout]);
   const value = useMemo<AppContextValue>(() => ({ farmer, plans, login: (email, password) => { const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); const user = users.find((item: Farmer & { password: string }) => item.email === email && item.password === password); if (!user) return false; const next = { name: user.name, email: user.email, country: user.country }; localStorage.setItem(SESSION_KEY, JSON.stringify(next)); setFarmer(next); return true; }, register: (next, password) => { const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); const existing = users.filter((item: Farmer) => item.email !== next.email); localStorage.setItem(USERS_KEY, JSON.stringify([...existing, { ...next, password }])); localStorage.setItem(SESSION_KEY, JSON.stringify(next)); setFarmer(next); }, logout, addPlan: (plan) => { const next = [plan, ...plans]; localStorage.setItem(PLANS_KEY, JSON.stringify(next)); setPlans(next); }, updatePlanStatus: (id, status) => { const next = plans.map((plan) => plan.id === id ? { ...plan, status } : plan); localStorage.setItem(PLANS_KEY, JSON.stringify(next)); setPlans(next); } }), [farmer, plans, logout]);
-  if (!loaded) return null; if (!farmer) return <AuthScreen onLogin={value.login} onRegister={value.register} />; return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  if (!loaded) return null;
+
+return (
+  <AppContext.Provider value={value}>
+    {!farmer ? (
+      <AuthScreen onLogin={value.login} onRegister={value.register} />
+    ) : (
+      children
+    )}
+  </AppContext.Provider>
+);
 }
-export function useApp() { const context = useContext(AppContext); if (!context) throw new Error('useApp must be used inside AppProvider'); return context; }
+
+export function useApp() {
+  const context = useContext(AppContext);
+
+  if (!context) {
+    throw new Error('useApp must be used inside AppProvider');
+  }
+
+  return context;
+}

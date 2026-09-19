@@ -137,12 +137,10 @@ export default function GeneratePlan() {
       return;
     }
 
-    if (!plantingDate || plantingDate < getToday()) {
-      setError(
-        'Choose today or a future planting date.'
-      );
-      return;
-    }
+    if (!plantingDate) {
+  setError('Please select a planting date.');
+  return;
+}
 
     const location =
       `${actualCity}, ${actualRegion}, ${actualCountry}`;
@@ -453,14 +451,17 @@ export default function GeneratePlan() {
         <label className="block text-black">
           Planting date *
 
-          <input
-            required
-            name="plantingDate"
-            type="date"
-            min={getToday()}
-            defaultValue={getToday()}
-            className="mt-1 w-full rounded border p-2 text-black"
-          />
+         <input
+          required
+          name="plantingDate"
+          type="date"
+          defaultValue={getToday()}
+          className="mt-1 w-full rounded border p-2 text-black"
+         />
+         <p className="mt-1 text-sm text-gray-600">
+          You can select a past date if the crop has already been planted.
+          The AI will start the plan from the next activities required.
+         </p>
         </label>
 
         <label className="block text-black">
