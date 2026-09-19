@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useApp } from './AppProvider';
 
 const navItems = [
   { href: '/', label: '🏠 Dashboard' },
@@ -13,6 +14,7 @@ const navItems = [
 ];
 
 export default function Sidebar() {
+  const { farmer, logout } = useApp();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,6 +42,7 @@ export default function Sidebar() {
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         } fixed md:static top-16 md:top-0 left-0 w-64 h-screen md:h-auto bg-green-700 text-white flex flex-col transition-transform duration-300 z-40 md:z-0`}
       >
+        <div className="px-6 pt-4 text-sm text-green-100">{farmer?.name} · {farmer?.country}</div>
         {/* Header - Desktop Only */}
         <div className="hidden md:block p-6 border-b border-green-600">
           <h1 className="text-2xl font-bold">🌾 Farm Planner</h1>
@@ -72,6 +75,7 @@ export default function Sidebar() {
 
         {/* Footer */}
         <div className="p-4 border-t border-green-600 text-sm text-green-100">
+          <button onClick={logout} className="mb-2 font-semibold underline">Log out</button>
           <p>© 2024 Farm Activity Planner</p>
         </div>
       </aside>
