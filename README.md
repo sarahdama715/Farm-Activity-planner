@@ -1,36 +1,249 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Farm Activity Planner
 
-## Getting Started
+An AI-powered web application that helps farmers organize farm activities from planting through harvesting. The application allows users to create farm plans based on their crop, farm size, number of workers, location, planting date, and available resources.
 
-First, run the development server:
+## Live Application
+
+**Live Preview:** https://farm-activity-planner.vercel.app/
+
+**GitHub Repository:** https://github.com/sarahdama715/Farm-Activity-planner
+
+## Project Overview
+
+The Farm Activity Planner was developed as a production-ready AI-enhanced frontend application.
+
+The application helps farmers plan and manage agricultural activities in one place. Users can create farm activity plans and receive an AI-generated plan based on the information they provide.
+
+The AI-generated plan considers the selected crop, farm size, workers, location, planting date, and available resources. It is designed to help the farmer understand what activities should be carried out at different stages of the farming cycle, including preparation, planting, crop management, and harvesting.
+
+## Main Features
+
+* Farmer registration and login
+* Farmer session management
+* Dashboard for viewing farm information and plans
+* AI-powered farm plan generation
+* Crop selection and farm details
+* Planting date and farm activity planning
+* Resource allocation
+* Crop management
+* Farm plan status tracking
+* Responsive design for desktop and mobile screens
+* Form validation
+* Error handling for AI generation
+* Idle session logout
+* Accessible form controls and navigation
+* Markdown rendering for AI-generated plans
+
+## AI Integration
+
+The application uses Google's Gemini API to generate farm activity plans.
+
+The AI receives information such as:
+
+* Crop type
+* Farm location
+* Farm size
+* Number of workers
+* Planting date
+* Available resources
+
+The generated response provides practical activities and recommendations for the farm.
+
+The application also considers the relationship between the planting date and the current date. For example, when a past planting date is entered, the generated plan can continue from the expected current stage instead of asking the farmer to plant again.
+
+The AI integration is implemented through a server-side API route:
+
+`src/app/api/generate-plan/route.ts`
+
+The Gemini API key is stored in an environment variable and is not committed to the repository.
+
+## Technologies Used
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Google Gemini API
+* `@google/genai`
+* React Markdown
+* Git and GitHub
+* Vercel
+
+## Application Screens
+
+The application includes the following main screens:
+
+* **Dashboard** — provides an overview of the farmer's plans.
+* **Generate Plan** — collects farm information and generates an AI-assisted farm plan.
+* **Resource Allocation** — helps organize resources associated with farm activities.
+* **Crop Management** — provides crop-related management information.
+* **Settings** — provides application settings and farmer information.
+
+## Running the Project Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sarahdama715/Farm-Activity-planner.git
+```
+
+### 2. Open the project
+
+```bash
+cd Farm-Activity-planner
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure the Gemini API key
+
+Create a `.env.local` file in the project root:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+Replace `your_api_key_here` with your Gemini API key.
+
+**Do not commit `.env.local` or expose the API key in the frontend.**
+
+### 5. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Production Build
 
-## Learn More
+The application can be checked locally using:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A successful build confirms that the application compiles correctly and that TypeScript and Next.js production checks pass.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Testing and Quality Assurance
 
-## Deploy on Vercel
+The application was tested before deployment and after deployment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### AI Functionality
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Generate Plan feature was tested using different planting dates, including:
+
+* Past planting dates
+* Planting scheduled for the following day
+* Future planting dates
+
+The tests checked that the generated plan responds appropriately to the farming stage rather than repeatedly telling a farmer to perform an activity that should already have happened.
+
+### Form Validation
+
+The Generate Plan form was tested with incomplete information to ensure required fields are validated before submission.
+
+### Navigation
+
+The main application screens were tested through normal navigation and page refreshes to ensure that the application does not produce blank pages or crashes.
+
+### Responsive Testing
+
+The application was tested at:
+
+* **375px** mobile viewport
+* **1280px** desktop viewport
+
+The main screens were checked for layout problems, overflowing content, navigation issues, and form usability.
+
+### Accessibility and Performance
+
+A production audit was performed using Google PageSpeed Insights.
+
+Results:
+
+| Category         |   Score |
+| ---------------- | ------: |
+| Performance      |  **98** |
+| Accessibility    |  **95** |
+| Best Practices   | **100** |
+| SEO              | **100** |
+| Agentic Browsing | **2/2** |
+
+These results were obtained from the deployed application.
+
+## Error Handling and Resilience
+
+The application includes validation and error handling around the AI generation process.
+
+If the AI service is temporarily unavailable or a request fails, the application handles the failure instead of allowing the entire application to crash.
+
+The application also handles invalid form submissions through required fields and validation.
+
+## Security
+
+* API credentials are stored using environment variables.
+* The Gemini API key is not stored directly in frontend code.
+* `.env.local` is excluded from version control.
+* AI requests are made through a server-side API route.
+
+## Deployment
+
+The application is deployed using Vercel.
+
+**Production URL:**
+
+https://farm-activity-planner.vercel.app/
+
+The GitHub repository is connected to the deployment so that changes can be built and deployed through the repository workflow.
+
+## Production Readiness Checklist
+
+* [x] Main application screens implemented
+* [x] Responsive layout tested
+* [x] AI functionality integrated
+* [x] AI-generated farm plans tested
+* [x] Form validation tested
+* [x] Navigation tested
+* [x] Mobile viewport tested
+* [x] Desktop viewport tested
+* [x] Production build tested
+* [x] Accessibility audit completed
+* [x] Performance audit completed
+* [x] Best Practices audit completed
+* [x] SEO audit completed
+* [x] API key stored as an environment variable
+* [x] Application deployed to Vercel
+* [x] GitHub repository available
+
+## Challenges and Lessons Learned
+
+One of the main challenges during development was integrating the AI service while keeping the API key secure. The Gemini integration was placed behind a server-side API route instead of exposing the key in the browser.
+
+Another challenge was making the AI-generated plan respond to different planting dates. The application needed to distinguish between a farm that has not yet been planted and one where planting has already taken place.
+
+The project also provided practical experience with responsive design, accessibility testing, error handling, deployment, and testing a frontend application in a production environment.
+
+## Future Improvements
+
+Possible future improvements include:
+
+* Connecting the application to a persistent database
+* Adding real weather data for the selected farm location
+* Adding notifications and reminders for upcoming activities
+* Providing more detailed crop-specific recommendations
+* Adding richer farm activity calendars
+* Improving resource tracking and reporting
+* Adding more detailed authentication and user account management
+
+## License
+
+This project was developed as part of a software engineering and AI frontend development learning project.
