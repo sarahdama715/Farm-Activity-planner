@@ -1,17 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+
 import Sidebar from '@/components/Sidebar';
+import { AppProvider } from '@/components/AppProvider';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'Farm Activity Planner',
@@ -24,15 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="flex flex-col md:flex-row h-screen bg-white">
-        <Sidebar />
-        <main className="flex-1 overflow-auto mt-16 md:mt-0">
-          <div className="p-4 md:p-8">{children}</div>
-        </main>
+    <html lang="en">
+      <body className="bg-gray-50">
+        <AppProvider>
+          <div className="min-h-screen md:flex">
+            <Sidebar />
+            <main className="flex-1 p-5 pt-20 md:p-8">{children}</main>
+          </div>
+        </AppProvider>
       </body>
     </html>
   );
