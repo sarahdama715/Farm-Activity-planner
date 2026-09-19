@@ -1,36 +1,6 @@
-export default function Dashboard() {
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-700 mt-2">
-          Welcome to your Farm Activity Planner. Manage your farm activities and resources efficiently.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-green-600">0</div>
-          <p className="text-gray-700 mt-2">Active Plans</p>
-        </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-blue-600">0</div>
-          <p className="text-gray-700 mt-2">Scheduled Activities</p>
-        </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-yellow-600">0</div>
-          <p className="text-gray-700 mt-2">Resources Allocated</p>
-        </div>
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-3xl font-bold text-purple-600">0</div>
-          <p className="text-gray-700 mt-2">Crops Managed</p>
-        </div>
-      </div>
-
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Recent Activity</h2>
-        <p className="text-gray-700">No activities yet. Start by creating a new plan or managing your crops.</p>
-      </div>
-    </div>
-  );
-}
+'use client';
+import Link from 'next/link';
+import { useApp } from '@/components/AppProvider';
+function greeting() { const hour = new Date().getHours(); return hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'; }
+export default function Dashboard() { const { farmer, plans } = useApp(); const planHref = plans.length === 1 ? `/plans/${plans[0].id}` : '/crop-management'; return <div className="space-y-8"><div><h1 className="text-4xl font-bold text-gray-900">{greeting()}, {farmer?.name}</h1><p className="mt-2 text-gray-700">Here is your farm activity overview for {farmer?.country}.</p></div><div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"><Card href={planHref} title="Active Plans" value={plans.length} colour="text-green-600" /><Card href={planHref} title="Scheduled Activities" value={plans.length * 5} colour="text-blue-600" /><Card href="/resource-allocation" title="Workers Planned" value={plans.reduce((sum, plan) => sum + plan.workers, 0)} colour="text-yellow-600" /><Card href="/crop-management" title="Crops Managed" value={new Set(plans.map((plan) => plan.crop)).size} colour="text-purple-600" /></div><section className="rounded-lg bg-white p-6 shadow"><h2 className="mb-4 text-2xl font-bold text-gray-900">Your saved plans</h2>{plans.length ? <ul className="space-y-3">{plans.map((plan) => <li key={plan.id}><Link href={`/plans/${plan.id}`} className="block rounded border p-3 text-gray-800 hover:bg-gray-50"><strong>{plan.crop}</strong> — {plan.location} · {plan.status || 'Planted'}</Link></li>)}</ul> : <p className="text-gray-700">No plans yet.</p>}</section></div>; }
+function Card({ href, title, value, colour }: { href: string; title: string; value: number; colour: string }) { return <Link href={href} className="rounded-lg bg-white p-6 shadow hover:shadow-md"><div className={`text-3xl font-bold ${colour}`}>{value}</div><p className="mt-2 text-gray-700">{title}</p></Link>; }
