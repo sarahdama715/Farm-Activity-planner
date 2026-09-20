@@ -284,6 +284,16 @@ Possible future improvements include:
 * Improving resource tracking and reporting
 * Adding more detailed authentication and user account management
 
+# Reflection
+## Reflection
+
+One of the hardest parts of this project was making the AI-generated farm plans respond correctly to different planting dates. It was not enough to simply ask the AI to generate a farming schedule. The prompt had to explain how the plan should change when the planting date was in the past, today, tomorrow, or a future date. I also had to make sure that the generated plan continued through crop management and harvesting instead of stopping after planting. Another challenging part was preparing the application for deployment and testing, especially dealing with environment variables, build errors, AI API availability, and making sure the application behaved correctly in production.
+
+If I were doing the project again, I would plan the testing and production-readiness work earlier. I initially focused heavily on building the application and AI functionality, then added more systematic testing, coverage, accessibility checks, and deployment documentation later. Starting these activities earlier would make it easier to identify issues before the final stages of the project. I would also design the AI response structure earlier so that generated plans could be displayed in more structured sections instead of relying mainly on formatted text.
+
+One surprising lesson was that adding AI to an application does not automatically make the application useful. The quality of the result depends heavily on the context given to the model, the rules defined in the prompt, validation of user input, error handling, and how the generated information is presented to the user. I learned that meaningful AI integration requires treating the AI as one part of the application rather than building the whole experience around a chatbot.
+
+
 ## License
 
 This project was developed as part of a software engineering and AI frontend development learning project.
