@@ -1,6 +1,8 @@
 # Farm Activity Planner
 
-An AI-powered web application that helps farmers organize farm activities from planting through harvesting. The application allows users to create farm plans based on their crop, farm size, number of workers, location, planting date, and available resources.
+# Project Brief
+Farm Activity Planner is an AI-enhanced web application designed to help farmers organize and plan agricultural activities from land preparation through planting, crop management, and harvesting. The main audience is farmers who need a simple way to structure farm activities based on their crop, farm size, available workers, location, and planting date. I chose this idea because farm activities often need to be completed at specific stages and dates, and I wanted to apply frontend engineering and AI to a practical problem where generated plans can provide useful, structured guidance rather than functioning as a general chatbot.
+
 
 ## Live Application
 
