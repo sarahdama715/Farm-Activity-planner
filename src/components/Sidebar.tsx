@@ -61,7 +61,7 @@ export default function Sidebar() {
                     onClick={() => setIsOpen(false)}
                     className={`block px-4 py-3 rounded-lg transition-colors ${
                       isActive
-                        ? 'bg-green-600 font-semibold'
+                        ? 'bg-green-700 font-semibold'
                         : 'hover:bg-green-600 text-green-50'
                     }`}
                   >
