@@ -62,7 +62,7 @@ export default function Sidebar() {
                     className={`block px-4 py-3 rounded-lg transition-colors ${
                       isActive
                         ? 'bg-green-700 font-semibold'
-                        : 'hover:bg-green-600 text-green-50'
+                        : 'hover:bg-green-700 text-green-50'
                     }`}
                   >
                     {item.label}
