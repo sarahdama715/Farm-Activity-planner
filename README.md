@@ -197,13 +197,48 @@ The application also handles invalid form submissions through required fields an
 
 ## Deployment
 
+## Deployment
+
 The application is deployed using Vercel.
 
 **Production URL:**
 
 https://farm-activity-planner.vercel.app/
 
-The GitHub repository is connected to the deployment so that changes can be built and deployed through the repository workflow.
+The GitHub repository is connected to the Vercel deployment so that changes can be built and deployed through the repository workflow.
+
+### Deployment Verification
+
+After deployment, the following checks are performed:
+
+* Production URL loads successfully.
+* All main navigation routes are accessible.
+* Generate Plan form loads and validates required fields.
+* AI plan generation is tested with valid and invalid inputs.
+* Error states are checked when an AI request cannot be completed.
+* Responsive behavior is checked on mobile and desktop viewports.
+* Accessibility and performance audits are reviewed after deployment.
+
+### Rollback Procedure
+
+If a production deployment introduces a serious problem:
+
+1. Identify the problematic deployment in the Vercel deployment history.
+2. Return the production deployment to the previous known-good version.
+3. Confirm that the production URL loads correctly.
+4. Re-test the main navigation and Generate Plan flow.
+5. Check that AI requests and error states are working.
+6. Document the issue before making a corrective change and redeploying.
+
+### Monitoring
+
+Production health is checked by:
+
+* Reviewing the Vercel deployment status and build logs.
+* Checking the production application after each deployment.
+* Testing the Generate Plan API through the application.
+* Reviewing errors reported during testing or encountered during use.
+* Re-running accessibility and performance checks when significant frontend changes are made.
 
 ## Production Readiness Checklist
 
@@ -223,6 +258,9 @@ The GitHub repository is connected to the deployment so that changes can be buil
 * [x] API key stored as an environment variable
 * [x] Application deployed to Vercel
 * [x] GitHub repository available
+* [x] Deployment verification process documented
+* [x] Rollback procedure documented
+* [x] Production monitoring approach documented
 
 ## Challenges and Lessons Learned
 
